@@ -1,0 +1,79 @@
+
+<ion-header>
+    <ion-navbar>
+        <button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+            <ion-title>Loan Officer</ion-title>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+    <h3>Loan Officer</h3>
+    <ion-list>
+
+        <ion-item>
+            <ion-label >First Name</ion-label>
+            <ion-input [(ngModel)]="lo.firstName" type="text"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label >Last Name</ion-label>
+            <ion-input [(ngModel)]="lo.lastName" type="text"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label >Address 1</ion-label>
+            <ion-input [(ngModel)]="lo.addressOne" type="text"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label >Address 2</ion-label>
+            <ion-input [(ngModel)]="lo.addressTwo" type="text"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label >City</ion-label>
+            <ion-input [(ngModel)]="lo.city" type="text"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label >State</ion-label>
+            <ion-input [(ngModel)]="lo.state" type="text"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label >Zip Code</ion-label>
+            <ion-input [(ngModel)]="lo.zipCode" type="text"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label >email</ion-label>
+            <ion-input [(ngModel)]="lo.email" type="email"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label >Office Phone</ion-label>
+            <ion-input [(ngModel)]="lo.officePhone" type="phone"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label >Cell Phone</ion-label>
+            <ion-input [(ngModel)]="lo.cellPhone" type="phone"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label >NMLS #</ion-label>
+            <ion-input [(ngModel)]="lo.nmlsNumber" type="text"></ion-input>
+        </ion-item>
+
+    </ion-list>
+
+    <p>
+        {{lo.firstName}}
+        {{lo.lastName}}
+    </p>
+
+    <button (click)="saveData()">Save</button>
+</ion-content>

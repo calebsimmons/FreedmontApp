@@ -1,0 +1,58 @@
+<ion-header>
+    <ion-navbar>
+        <button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+        </button>
+            <ion-title>Write Letter</ion-title>
+    </ion-navbar>
+</ion-header>
+
+
+<ion-content padding class="writeLetter">
+
+    <h3>Letter Fields</h3>
+    <ion-list>
+
+        <ion-item>
+            <ion-label >Borrower Name</ion-label>
+            <ion-input [(ngModel)]="borrower.name" type="text"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label>Loan Program</ion-label>
+            <ion-select [(ngModel)]="loan.program">
+                <ion-option value="Conventional">Conventional</ion-option>
+                <ion-option value="FHA">FHA</ion-option>
+                <ion-option value="USDA">USDA</ion-option>
+                <ion-option value="VA">VA</ion-option>
+            </ion-select>
+        </ion-item>
+
+        <ion-item>
+            <ion-label >Loan Term (years)</ion-label>
+            <ion-input [(ngModel)]="loan.term" type="number"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label >Rate Type</ion-label>
+            <ion-select [(ngModel)]="loan.rateType">
+                <ion-option value="Fixed">Fixed</ion-option>
+                <ion-option value="Adjustable">Adjustable</ion-option>
+            </ion-select>
+        </ion-item>
+
+        <ion-item>
+            <ion-label >Sales Price</ion-label>
+            <ion-input [(ngModel)]="loan.salesPrice" type="text"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label >Base Loan Ammount</ion-label>
+            <ion-input [(ngModel)]="loan.baseLoanAmmount" type="text"></ion-input>
+        </ion-item>
+
+    </ion-list>
+
+    <button (click)="logData()">Send Letter</button>
+
+</ion-content>
