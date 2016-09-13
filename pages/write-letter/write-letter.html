@@ -15,7 +15,7 @@
 
         <ion-item>
             <ion-label >Borrower Name</ion-label>
-            <ion-input [(ngModel)]="borrower.name" type="text"></ion-input>
+            <ion-input [(ngModel)]="loan.borrowerName" type="text"></ion-input>
         </ion-item>
 
         <ion-item>
@@ -52,7 +52,7 @@
         </ion-item>
 
     </ion-list>
+    <button (click)="displayLetterURL()">Send Letter</button>
 
-    <button (click)="logData()">Send Letter</button>
 
 </ion-content>

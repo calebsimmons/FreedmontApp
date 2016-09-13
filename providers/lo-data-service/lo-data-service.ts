@@ -1,4 +1,4 @@
-import {Storage, SqlStorage} from 'ionic-angular';
+import { Storage, SqlStorage } from 'ionic-angular';
 import { Injectable } from '@angular/core';
 
 
@@ -21,8 +21,6 @@ export class LoDataService {
             cellPhone TEXT,
             nmlsNumber TEXT
         )`);
-
-
 
         this.storage.query(`SELECT * FROM loanOfficer WHERE id = 1`).then((response) => {
             var rowsFound = response.res.rows.length;
@@ -48,8 +46,17 @@ export class LoDataService {
         this.storage.query(sql);
     }
 
-    public getData() {
-        return this.storage.query('SELECT * FROM loanOfficer');
+    public loadData(lo) {
+        return this.storage.query('SELECT * FROM loanOfficer').then( data => {
+            if (data.res.rows.length > 0) {
+                let item = data.res.rows.item(0);
+                for (var key in item) {
+                    if (item[key] != null) {
+                        lo[key] = item[key];
+                    }
+                }
+            }
+        });
     }
 
 }

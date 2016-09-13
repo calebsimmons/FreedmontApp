@@ -3,14 +3,8 @@ import { NavController } from 'ionic-angular';
 
 import { LoDataService } from '../../providers/lo-data-service/lo-data-service';
 
-/*
-  Generated class for the LoanOfficerPage page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
-    templateUrl: 'build/pages/loanOfficer/loanOfficer.html',
+    templateUrl: 'build/pages/loan-officer/loan-officer.html',
     providers: [LoDataService]
 })
 export class LoanOfficer {
@@ -30,18 +24,7 @@ export class LoanOfficer {
     }
 
     private loadData() {
-        this.loDataService.getData().then(
-            data => {
-                if (data.res.rows.length > 0) {
-                    let item = data.res.rows.item(0);
-                    for (var key in item) {
-                        if (item[key] != null) {
-                            this.lo[key] = item[key];
-                        }
-                    }
-                }
-            }
-        );
+        this.loDataService.loadData(this.lo);
     }
 
     ionViewLoaded() {

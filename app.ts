@@ -2,8 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import { ionicBootstrap, Platform, Nav } from 'ionic-angular';
 import { StatusBar } from 'ionic-native';
 
-import { WriteLetter } from './pages/writeLetter/writeLetter';
-import { LoanOfficer } from './pages/loanOfficer/loanOfficer';
+import { WriteLetter } from './pages/write-letter/write-letter';
+import { LoanOfficer } from './pages/loan-officer/loan-officer';
 
 @Component({
   templateUrl: 'build/app.html'
