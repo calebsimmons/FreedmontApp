@@ -18,7 +18,6 @@ class MyApp {
   constructor(public platform: Platform) {
     this.initializeApp();
 
-    // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Write Letter', component: WriteLetter },
       { title: 'Loan Officer', component: LoanOfficer },
