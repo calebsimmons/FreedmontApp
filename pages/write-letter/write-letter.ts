@@ -3,20 +3,21 @@ import { NavController } from 'ionic-angular';
 
 import { LetterService } from '../../providers/letter-service/letter-service';
 
-
 @Component({
     templateUrl: 'build/pages/write-letter/write-letter.html',
     providers: [ LetterService ]
 })
 export class WriteLetter {
-    public letterUrl: any = {};
+    public letterBase64: any = {};
+    public letterBuffer: any = {};
+    public letterBlob: any = {};
     public loan: any = {
-        borrowerName: "",
-        program: "",
-        term: "",
-        rateType: "",
-        salesPrice: "",
-        baseLoanAmmount: ""
+        borrowerName: '',
+        program: '',
+        term: '',
+        rateType: '',
+        salesPrice: '',
+        baseLoanAmmount: ''
     };
 
     constructor(
@@ -33,11 +34,29 @@ export class WriteLetter {
         this.letterService.openLetter(this.loan);
     }
 
-    displayLetterURL() {
-        this.letterService.getLetterB64(this.loan).then( encodedString => {
-            this.letterUrl = encodedString;
+    getLetterBase64() {
+        this.letterService.getLetterBase64(this.loan).then( encodedString => {
+            this.letterBase64 = encodedString;
+            console.log(this.letterBase64);
         });
-        console.log(this.letterUrl);
+    }
+
+    getLetterBuffer() {
+        this.letterService.getLetterBuffer(this.loan).then( buffer => {
+            this.letterBuffer = buffer;
+            console.log(this.letterBuffer);
+        });
+    }
+
+    getLetterBlob() {
+        this.letterService.getLetterBuffer(this.loan).then( buffer => {
+            this.letterBuffer = buffer;
+            console.log(this.letterBuffer);
+            return this.letterService.getLetterBlob(buffer);
+        }).then( blob => {
+            this.letterBlob = blob;
+            console.log(this.letterBlob);
+        });
     }
 
 }
