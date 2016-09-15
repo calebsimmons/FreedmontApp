@@ -59,4 +59,12 @@ export class WriteLetter {
         });
     }
 
+    openPdf() {
+        this.letterService.getLetterBase64(this.loan).then( encodedString => {
+            this.letterBase64 = encodedString;
+            console.log(this.letterBase64);
+            return this.letterService.openPdf(encodedString);
+        });
+    }
+
 }

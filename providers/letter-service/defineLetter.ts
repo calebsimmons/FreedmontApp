@@ -1,4 +1,3 @@
-
 export function defineLetter(loan, lo) {
 
     var images = {

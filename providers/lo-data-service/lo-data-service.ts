@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class LoDataService {
     storage: Storage = null;
+
     constructor() {
         this.storage = new Storage(SqlStorage);
         this.storage.query(`CREATE TABLE IF NOT EXISTS loanOfficer (id INTEGER PRIMARY KEY AUTOINCREMENT,

@@ -1,10 +1,17 @@
 import { Injectable } from '@angular/core';
 
-declare var pdfMake: any;
-
+import { File } from 'ionic-native';
 
 import { LoDataService } from '../../providers/lo-data-service/lo-data-service';
-import { defineLetter } from './letter.ts';
+
+// Class method found in './defineLetter.ts'
+import { defineLetter } from './defineLetter.ts';
+
+// declare vars to ignore unsupported typescript debuging
+declare var pdfMake: any;
+declare var cordova: any;
+
+const fs: string = cordova.file.dataDirectory;
 
 
 @Injectable()
@@ -39,6 +46,15 @@ export class LetterService {
         });
     }
 
+    getLetterUrl(loan) {
+        var doc = defineLetter(loan, this.lo);
+        return new Promise(function(resolve, reject) {
+            pdfMake.createPdf(doc).getDataUrl(function(url) {
+                resolve(url);
+            });
+        });
+    }
+
     getLetterBlob(buffer) {
         return new Promise(function(resolve, reject) {
             var blob = new Blob([buffer], {type: 'application/pdf'});
@@ -46,5 +62,12 @@ export class LetterService {
         });
     }
 
+    saveBlobToFile(blob) {
+        return new Promise(function(resolve, reject) {
+            File.writeFile(fs, 'letter.pdf', blob, true);
+        });
+    }
+
+    
 
 }
