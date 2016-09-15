@@ -59,11 +59,17 @@ export class WriteLetter {
         });
     }
 
-    openPdf() {
-        this.letterService.getLetterBase64(this.loan).then( encodedString => {
-            this.letterBase64 = encodedString;
+    emailPdf() {
+        this.letterService.getLetterBuffer(this.loan).then( buffer => {
+            this.letterBuffer = buffer;
+            console.log(this.letterBuffer);
+            return this.letterService.getLetterBlob(buffer);
+         }).then( blob => {
+            this.letterBase64 = blob;
             console.log(this.letterBase64);
-            return this.letterService.openPdf(encodedString);
+            return this.letterService.saveBlobToFile(blob);
+        }).then( filePath => {
+            return this.letterService.emailPdf(filePath);
         });
     }
 
