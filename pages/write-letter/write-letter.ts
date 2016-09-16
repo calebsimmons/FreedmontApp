@@ -68,8 +68,8 @@ export class WriteLetter {
             this.letterBase64 = blob;
             console.log(this.letterBase64);
             return this.letterService.saveBlobToFile(blob);
-        }).then( filePath => {
-            return this.letterService.emailPdf(filePath);
+        }).catch( e => {
+            console.log(e);
         });
     }
 
