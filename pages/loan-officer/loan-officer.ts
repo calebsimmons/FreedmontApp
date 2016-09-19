@@ -7,6 +7,7 @@ import { LoDataService } from '../../providers/lo-data-service/lo-data-service';
     templateUrl: 'build/pages/loan-officer/loan-officer.html',
     providers: [LoDataService]
 })
+
 export class LoanOfficer {
 
     public lo: any = {};

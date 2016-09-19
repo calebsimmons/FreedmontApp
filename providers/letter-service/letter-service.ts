@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { File, FileOpener } from 'ionic-native';
+import { File, SocialSharing} from 'ionic-native';
 
 import { LoDataService } from '../../providers/lo-data-service/lo-data-service';
 
@@ -14,6 +14,7 @@ declare var cordova: any;
 export class LetterService {
     loDataService: LoDataService = null;
     lo: any = {};
+    fs: string = cordova.file.externalDataDirectory;
 
     constructor() {
         this.loDataService = new LoDataService();
@@ -58,21 +59,25 @@ export class LetterService {
         });
     }
 
-    saveBlobToFile(blob) {
-        return new Promise(function(resolve, reject) {
-
-            var fs = cordova.file.externalDataDirectory;
-
-            File.createFile(fs, 'letter.pdf', true).then( resolve => {
+    emailBlobAsFile(blob) {
+            File.createFile(this.fs, 'letter.pdf', true).then( resolve => {
                 console.log('file created');
-                return File.writeFile(fs, 'letter.pdf', blob, true);
-            }).then(resolve => {
-                return FileOpener.open(fs + 'letter.pdf', 'application/pdf');
-            }).then(resolve => {
-                console.log(resolve);
-            });
+                return File.writeFile(this.fs, 'letter.pdf', blob, true);
+            }).then(() => {
+                // Check if sharing via email is supported
+                SocialSharing.canShareViaEmail().then(() => {
+                  console.log('Sharing via email is possible');
+                }).catch(() => {
+                  console.log('Sharing via email is not possible');
+                });
 
-        });
+                // Share via email
+                SocialSharing.shareViaEmail('See attached...', 'Your Prequalification Letter', [] , [] , [], [this.fs + 'letter.pdf']).then(() => {
+                  console.log('Email sent!');
+                }).catch(() => {
+                  console.log('Email not sent ...');
+                });
+            });
     }
 
 }

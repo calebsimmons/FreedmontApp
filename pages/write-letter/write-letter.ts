@@ -65,11 +65,9 @@ export class WriteLetter {
             console.log(this.letterBuffer);
             return this.letterService.getLetterBlob(buffer);
          }).then( blob => {
-            this.letterBase64 = blob;
-            console.log(this.letterBase64);
-            return this.letterService.saveBlobToFile(blob);
-        }).catch( e => {
-            console.log(e);
+            this.letterBlob = blob;
+            console.log(this.letterBlob);
+            return this.letterService.emailBlobAsFile(blob);
         });
     }
 
