@@ -25,6 +25,13 @@ export class WriteLetter {
         public letterService: LetterService
     ) {}
 
+    calculateBase() {
+        var ltv: number = parseFloat(this.loan.ltv) / 100;
+        var salesPrice: number = parseInt(this.loan.salesPrice);
+        console.log(salesPrice * ltv);
+        this.loan.baseLoanAmmount = (salesPrice * ltv).toString();
+    }
+
 
     logData() {
         console.log(this.loan);

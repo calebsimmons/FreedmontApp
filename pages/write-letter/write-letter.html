@@ -43,12 +43,17 @@
 
         <ion-item>
             <ion-label >Sales Price</ion-label>
-            <ion-input [(ngModel)]="loan.salesPrice" type="text"></ion-input>
+            <ion-input [(ngModel)]="loan.salesPrice" (ngModelChange)="calculateBase()" type="text"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label >LTV</ion-label>
+            <ion-input [(ngModel)]="loan.ltv" (ngModelChange)="calculateBase()" type="number"></ion-input>
         </ion-item>
 
         <ion-item>
             <ion-label >Base Loan Ammount</ion-label>
-            <ion-input [(ngModel)]="loan.baseLoanAmmount" type="text"></ion-input>
+            <ion-input [(ngModel)]="loan.baseLoanAmmount" (ngModelChange)="calculateBase()" type="text"></ion-input>
         </ion-item>
 
     </ion-list>
