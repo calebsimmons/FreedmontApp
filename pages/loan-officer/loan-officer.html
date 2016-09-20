@@ -1,6 +1,6 @@
 
 <ion-header>
-    <ion-navbar>
+    <ion-navbar primary>
         <button menuToggle>
             <ion-icon name="menu"></ion-icon>
         </button>
@@ -68,8 +68,10 @@
             <ion-input [(ngModel)]="lo.nmlsNumber" type="text"></ion-input>
         </ion-item>
 
+        <ion-item></ion-item>
+
     </ion-list>
 
 
-    <button (click)="saveData()">Save</button>
+    <button (click)="saveData()"><ion-icon name="person-add"></ion-icon>Save</button>
 </ion-content>
