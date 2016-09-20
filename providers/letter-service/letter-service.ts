@@ -14,11 +14,18 @@ declare var cordova: any;
 export class LetterService {
     loDataService: LoDataService = null;
     lo: any = {};
-    fs: string = cordova.file.externalDataDirectory;
+    fs: string = null;
 
     constructor() {
         this.loDataService = new LoDataService();
         this.loDataService.loadData(this.lo);
+
+        // determine if on mobile or browser
+        try {
+            this.fs = cordova.file.externalDataStorage;
+        } catch (e) {
+
+        };
     }
 
     openLetter(loan) {
