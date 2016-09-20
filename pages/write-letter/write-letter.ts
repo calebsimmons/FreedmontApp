@@ -25,11 +25,47 @@ export class WriteLetter {
         public letterService: LetterService
     ) {}
 
-    calculateBase() {
-        var ltv: number = parseFloat(this.loan.ltv) / 100;
-        var salesPrice: number = parseInt(this.loan.salesPrice);
-        console.log(salesPrice * ltv);
-        this.loan.baseLoanAmmount = (salesPrice * ltv).toString();
+    calculateBaseLoanAmmount() {
+        console.log('fired calculateBaseLoanAmmount()');
+        var ltv = parseFloat(this.loan.ltv) / 100;
+        var sales = parseInt(this.loan.salesPrice);
+        if (!isNaN(ltv) && !isNaN(sales)) {
+            this.loan.baseLoanAmmount = (sales * ltv).toFixed(0).toString();
+        }
+    }
+
+    calculateLTV() {
+        console.log('fired calculateLTV()');
+        var base = parseInt(this.loan.baseLoanAmmount);
+        var sales = parseInt(this.loan.salesPrice);
+        if (sales !== 0 && !isNaN(base) && !isNaN(sales)) {
+            this.loan.ltv = (base / sales * 100).toString();
+        }
+    }
+
+    calculateSalesPrice() {
+        console.log('fired calculateSalesPrice()');
+        var base = parseInt(this.loan.baseLoanAmmount);
+        var ltv = parseFloat(this.loan.ltv) / 100;
+        if (ltv !== 0 && !isNaN(ltv) && !isNaN(base)) {
+            this.loan.salesPrice = (base / ltv).toFixed(0).toString();
+        }
+    }
+
+    baseChanges() {
+        console.log('baseLoanAmmount changed...');
+        this.calculateLTV();
+    }
+
+    ltvChanges() {
+        console.log('ltv changed...');
+        this.calculateBaseLoanAmmount();
+        this.calculateSalesPrice();
+    }
+
+    salesChanges() {
+        console.log('salesPrices changed...');
+        this.calculateBaseLoanAmmount();
     }
 
 
