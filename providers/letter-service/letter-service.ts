@@ -19,13 +19,6 @@ export class LetterService {
     constructor() {
         this.loDataService = new LoDataService();
         this.loDataService.loadData(this.lo);
-
-        // determine if on mobile or browser
-        try {
-            this.fs = cordova.file.externalDataStorage;
-        } catch (e) {
-
-        };
     }
 
     openLetter(loan) {
@@ -67,22 +60,24 @@ export class LetterService {
     }
 
     emailBlobAsFile(blob) {
-            File.createFile(this.fs, 'letter.pdf', true).then( resolve => {
-                console.log('file created');
-                return File.writeFile(this.fs, 'letter.pdf', blob, true);
-            }).then(() => {
-                // Check if sharing via email is supported
-                SocialSharing.canShareViaEmail().then(() => {
-                  console.log('Sharing via email is possible');
-                }).catch(() => {
-                  console.log('Sharing via email is not possible');
-                });
+            return new Promise(function(resolve, reject) {
+                File.createFile(cordova.file.externalDataDirectory, 'letter.pdf', true).then( resolve => {
+                    console.log('file created');
+                    return File.writeFile(cordova.file.externalDataDirectory, 'letter.pdf', blob, true);
+                }).then(() => {
+                    // Check if sharing via email is supported
+                    SocialSharing.canShareViaEmail().then(() => {
+                      console.log('Sharing via email is possible');
+                    }).catch(() => {
+                      console.log('Sharing via email is not possible');
+                    });
 
-                // Share via email
-                SocialSharing.shareViaEmail('See attached...', 'Your Prequalification Letter', [] , [] , [], [this.fs + 'letter.pdf']).then(() => {
-                  console.log('Email sent!');
-                }).catch(() => {
-                  console.log('Email not sent ...');
+                    // Share via email
+                    SocialSharing.shareViaEmail('See attached...', 'Your Prequalification Letter', [] , [] , [], [cordova.file.externalDataDirectory + 'letter.pdf']).then(() => {
+                      console.log('Email sent!');
+                    }).catch(() => {
+                      console.log('Email not sent ...');
+                    });
                 });
             });
     }

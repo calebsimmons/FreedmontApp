@@ -112,6 +112,8 @@ export class WriteLetter {
             console.log(this.letterBlob);
             return this.letterService.emailBlobAsFile(blob);
         });
+
+        this.openLetter();
     }
 
 }
