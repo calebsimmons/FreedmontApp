@@ -12,9 +12,10 @@ export class LoanOfficer {
 
     public lo: any = {};
 
-    constructor(private navCtrl: NavController, public loDataService: LoDataService) {
-
-    }
+    constructor(
+        private navCtrl: NavController,
+        public loDataService: LoDataService
+    ) {}
 
     logData() {
         console.log(this.lo);

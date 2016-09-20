@@ -73,7 +73,15 @@ export class LetterService {
                     });
 
                     // Share via email
-                    SocialSharing.shareViaEmail('See attached...', 'Your Prequalification Letter', [] , [] , [], [cordova.file.externalDataDirectory + 'letter.pdf']).then(() => {
+                    SocialSharing.shareViaEmail(
+                        'See attached...', // body
+                        'Your Prequalification Letter', // subject
+                        [], // to:
+                        [], // cc:
+                        [], // bcc:
+                        // Array for files to attach
+                        [cordova.file.externalDataDirectory + 'letter.pdf']
+                    ).then(() => {
                       console.log('Email sent!');
                     }).catch(() => {
                       console.log('Email not sent ...');
