@@ -20,7 +20,7 @@
 
         <ion-item>
             <ion-label>Loan Program</ion-label>
-            <ion-select [(ngModel)]="loan.program">
+            <ion-select [(ngModel)]="loan.program" (ngModelChange)="programChanges()">
                 <ion-option value="Conventional">Conventional</ion-option>
                 <ion-option value="FHA">FHA</ion-option>
                 <ion-option value="USDA">USDA</ion-option>
@@ -43,7 +43,7 @@
 
         <ion-item>
             <ion-label >Sales Price</ion-label>
-            <ion-input [(ngModel)]="loan.salesPrice" (ngModelChange)="salesChanges()" type="text"></ion-input>
+            <ion-input [(ngModel)]="loan.salesPrice" (ngModelChange)="salesChanges()" type="number"></ion-input>
         </ion-item>
 
         <ion-item>
@@ -52,8 +52,13 @@
         </ion-item>
 
         <ion-item>
-            <ion-label >Base Loan Ammount</ion-label>
-            <ion-input [(ngModel)]="loan.baseLoanAmmount" (ngModelChange)="baseChanges()" type="text"></ion-input>
+            <ion-label >Base Loan Amount</ion-label>
+            <ion-input [(ngModel)]="loan.baseLoanAmount" (ngModelChange)="baseChanges()" type="number"></ion-input>
+        </ion-item>
+
+        <ion-item>
+            <ion-label >Total Loan Amount</ion-label>
+            <ion-input [(ngModel)]="loan.totalLoanAmount" type="number" disabled="true"></ion-input>
         </ion-item>
 
     </ion-list>

@@ -87,7 +87,8 @@ export function defineLetter(loan, lo) {
                             body: [
                                 ['Loan Program: ', `${loan.program} ${loan.term} Year ${loan.rateType}`],
                                 ['Sales Price: ', loan.salesPrice],
-                                ['Base Loan Amount: ', loan.baseLoanAmmount],
+                                ['Base Loan Amount: ', loan.baseLoanAmount],
+                                ['Total Loan Amount: ', loan.totalLoanAmount]
                             ]
                         }
                     },
