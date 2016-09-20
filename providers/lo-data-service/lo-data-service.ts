@@ -21,15 +21,15 @@ export class LoDataService {
             officePhone TEXT,
             cellPhone TEXT,
             nmlsNumber TEXT
-        )`);
-
-        this.storage.query(`SELECT * FROM loanOfficer WHERE id = 1`).then((response) => {
-            var rowsFound = response.res.rows.length;
-            console.log(rowsFound + ' rows found');
-            if (rowsFound === 0) {
-                console.log('creating blank record ... ');
-                this.storage.query('INSERT INTO loanOfficer DEFAULT VALUES');
-            }
+        )`).then(() => {
+            this.storage.query(`SELECT * FROM loanOfficer WHERE id = 1`).then((response) => {
+                var rowsFound = response.res.rows.length;
+                console.log(rowsFound + ' rows found');
+                if (rowsFound === 0) {
+                    console.log('creating blank record ... ');
+                    this.storage.query('INSERT INTO loanOfficer DEFAULT VALUES');
+                }
+            });
         });
     }
 

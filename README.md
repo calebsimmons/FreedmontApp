@@ -1,2 +1,2 @@
 # FreedmontApp
-an in-house mobile application for Freedmont Mortgage 
+An in-house mobile application for Freedmont Mortgage.
