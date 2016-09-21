@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { File, SocialSharing} from 'ionic-native';
+import { Platform } from 'ionic-angular';
 
 import { LoDataService } from '../../providers/lo-data-service/lo-data-service';
 // Class method found in './defineLetter.ts'
@@ -13,11 +14,22 @@ declare var cordova: any;
 export class LetterService {
     loDataService: LoDataService = null;
     lo: any = {};
-    fs: string = null;
+    os: any = {};
 
-    constructor() {
+    constructor(public platform: Platform) {
+        this.platform = platform;
         this.loDataService = new LoDataService();
         this.loDataService.loadData(this.lo);
+        if ( this.platform.is('mobile') ) {
+
+            if ( this.platform.is('ios') ) {
+                this.os = 'ios';
+            }
+
+            if ( this.platform.is('android') ) {
+                this.os = 'android';
+            }
+        }
     }
 
     openLetter(loan) {
@@ -59,34 +71,46 @@ export class LetterService {
     }
 
     emailBlobAsFile(blob) {
-            return new Promise(function(resolve, reject) {
-                File.createFile(cordova.file.tempDirectory, 'letter.pdf', true).then( resolve => {
-                    console.log('file created');
-                    return File.writeFile(cordova.file.tempDirectory, 'letter.pdf', blob, true);
-                }).then(() => {
-                    // Check if sharing via email is supported
-                    SocialSharing.canShareViaEmail().then(() => {
-                      console.log('Sharing via email is possible');
-                    }).catch(() => {
-                      console.log('Sharing via email is not possible');
-                    });
+        var os = this.os;    
+        return new Promise(function(resolve, reject) {
 
-                    // Share via email
-                    SocialSharing.shareViaEmail(
-                        'See attached...', // body
-                        'Your Prequalification Letter', // subject
-                        [], // to:
-                        [], // cc:
-                        [], // bcc:
-                        // Array for files to attach
-                        [cordova.file.tempDirectory + 'letter.pdf']
-                    ).then(() => {
-                      console.log('Email sent!');
-                    }).catch(() => {
-                      console.log('Email not sent ...');
-                    });
+            if (os == 'ios') {
+                var fs = cordova.file.tempDirectory;
+                console.log(fs);
+            }
+
+            if (os == 'android') {
+                var fs = cordova.file.externalCacheDirectory;
+                console.log(fs);
+            }
+
+            File.createFile(fs, 'letter.pdf', true).then( resolve => {
+                console.log('file created');
+                return File.writeFile(fs, 'letter.pdf', blob, true);
+            }).then(() => {
+                // Check if sharing via email is supported
+                SocialSharing.canShareViaEmail().then(() => {
+                  console.log('Sharing via email is possible');
+                }).catch(() => {
+                  console.log('Sharing via email is not possible');
+                });
+
+                // Share via email
+                SocialSharing.shareViaEmail(
+                    'See attached...', // body
+                    'Your Prequalification Letter', // subject
+                    [], // to:
+                    [], // cc:
+                    [], // bcc:
+                    // Array for files to attach
+                    [fs + 'letter.pdf']
+                ).then(() => {
+                  console.log('Email sent!');
+                }).catch(() => {
+                  console.log('Email not sent ...');
                 });
             });
+        });
     }
 
 }
