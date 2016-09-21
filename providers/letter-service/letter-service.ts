@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { File, SocialSharing} from 'ionic-native';
 
 import { LoDataService } from '../../providers/lo-data-service/lo-data-service';
-
 // Class method found in './defineLetter.ts'
 import { defineLetter } from './defineLetter.ts';
 
@@ -61,9 +60,9 @@ export class LetterService {
 
     emailBlobAsFile(blob) {
             return new Promise(function(resolve, reject) {
-                File.createFile(cordova.file.externalDataDirectory, 'letter.pdf', true).then( resolve => {
+                File.createFile(cordova.file.tempDirectory, 'letter.pdf', true).then( resolve => {
                     console.log('file created');
-                    return File.writeFile(cordova.file.externalDataDirectory, 'letter.pdf', blob, true);
+                    return File.writeFile(cordova.file.tempDirectory, 'letter.pdf', blob, true);
                 }).then(() => {
                     // Check if sharing via email is supported
                     SocialSharing.canShareViaEmail().then(() => {
@@ -80,7 +79,7 @@ export class LetterService {
                         [], // cc:
                         [], // bcc:
                         // Array for files to attach
-                        [cordova.file.externalDataDirectory + 'letter.pdf']
+                        [cordova.file.tempDirectory + 'letter.pdf']
                     ).then(() => {
                       console.log('Email sent!');
                     }).catch(() => {
