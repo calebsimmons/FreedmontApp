@@ -132,7 +132,6 @@ export class WriteLetter {
             return this.letterService.emailBlobAsFile(blob);
         });
 
-        this.openLetter();
     }
 
 }
