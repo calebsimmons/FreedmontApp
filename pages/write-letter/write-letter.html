@@ -1,5 +1,5 @@
 <ion-header>
-    <ion-navbar>
+    <ion-navbar primary>
         <button menuToggle>
             <ion-icon name="menu"></ion-icon>
         </button>
@@ -61,8 +61,10 @@
             <ion-input [(ngModel)]="loan.totalLoanAmount" type="number" disabled="true"></ion-input>
         </ion-item>
 
+        <ion-item></ion-item>
+
     </ion-list>
-    <button (click)="emailPdf()">Send Letter</button>
+    <button block (click)="emailPdf()"><ion-icon name="mail"></ion-icon>Send Letter</button>
 
 
 </ion-content>
