@@ -1,7 +1,7 @@
 <ion-header>
 
     <ion-navbar>
-        <ion-icon (click)="dismissModal()" name="arrow-back"></ion-icon>
+        <button clear (click)="dismissModal()"><ion-icon name="arrow-back"></ion-icon>Back</button>
         <ion-title>Letter Preview</ion-title>
     </ion-navbar>
 
@@ -9,5 +9,5 @@
 
 
 <ion-content padding>
-
+        <pdf-viewer src="{{letter.url}}" style="display: block"></pdf-viewer>
 </ion-content>

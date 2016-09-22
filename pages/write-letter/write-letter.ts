@@ -102,41 +102,37 @@ export class WriteLetter {
     getLetterBase64() {
         this.letterService.getLetterBase64(this.loan).then( encodedString => {
             this.letterBase64 = encodedString;
-            console.log(this.letterBase64);
         });
     }
 
     getLetterBuffer() {
         this.letterService.getLetterBuffer(this.loan).then( buffer => {
             this.letterBuffer = buffer;
-            console.log(this.letterBuffer);
         });
     }
 
     getLetterBlob() {
         this.letterService.getLetterBuffer(this.loan).then( buffer => {
             this.letterBuffer = buffer;
-            console.log(this.letterBuffer);
             return this.letterService.getLetterBlob(buffer);
         }).then( blob => {
             this.letterBlob = blob;
-            console.log(this.letterBlob);
         });
     }
 
     presentLetterModal() {
-        let letterModal = this.modalCtrl.create(LetterModal);
-        letterModal.present();
+        return this.letterService.getLetterUrl(this.loan).then( url => {
+            var letterModal = this.modalCtrl.create(LetterModal, {'url' : url});
+            letterModal.present();
+        });
     }
 
     emailPdf() {
         this.letterService.getLetterBuffer(this.loan).then( buffer => {
             this.letterBuffer = buffer;
-            console.log(this.letterBuffer);
             return this.letterService.getLetterBlob(buffer);
          }).then( blob => {
             this.letterBlob = blob;
-            console.log(this.letterBlob);
             return this.letterService.emailBlobAsFile(blob);
         });
 
