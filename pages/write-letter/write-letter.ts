@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ModalController } from 'ionic-angular';
+
+import { LetterModal } from '../letter-modal/letter-modal';
 
 import { LetterService } from '../../providers/letter-service/letter-service';
 
@@ -23,6 +25,7 @@ export class WriteLetter {
 
     constructor(
         public navCtrl: NavController,
+        public modalCtrl: ModalController,
         public letterService: LetterService
     ) {}
 
@@ -119,6 +122,11 @@ export class WriteLetter {
             this.letterBlob = blob;
             console.log(this.letterBlob);
         });
+    }
+
+    presentLetterModal() {
+        let letterModal = this.modalCtrl.create(LetterModal);
+        letterModal.present();
     }
 
     emailPdf() {
