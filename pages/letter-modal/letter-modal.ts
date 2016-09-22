@@ -12,6 +12,7 @@ import { LetterService } from '../../providers/letter-service/letter-service';
 
 export class LetterModal {
     letter: any = {};
+    loan: any = {};
 
     constructor(
         public navCtrl: NavController,
@@ -21,10 +22,19 @@ export class LetterModal {
         this.letter = {
             url: this.params.get('url'),
         };
+        this.loan = this.params.get('loan');
     }
 
     dismissModal() {
         this.navCtrl.pop();
     }
 
+    emailPdf() {
+        this.letterService.getLetterBuffer(this.loan).then( buffer => {
+            return this.letterService.getLetterBlob(buffer);
+         }).then( blob => {
+            return this.letterService.emailBlobAsFile(blob);
+        });
+
+    }
 }

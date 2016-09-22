@@ -121,8 +121,12 @@ export class WriteLetter {
     }
 
     presentLetterModal() {
+        var loan = this.loan;
         return this.letterService.getLetterUrl(this.loan).then( url => {
-            var letterModal = this.modalCtrl.create(LetterModal, {'url' : url});
+            var letterModal = this.modalCtrl.create(LetterModal, {
+                'url' : url,
+                'loan' : loan,
+            });
             letterModal.present();
         });
     }
