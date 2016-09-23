@@ -1,0 +1,21 @@
+<ion-header>
+
+    <ion-navbar>
+        <ion-buttons start>
+            <button (click)="dismissModal()"><ion-icon name="arrow-back"></ion-icon>Back</button>
+        </ion-buttons>
+
+        <ion-title center>Letter Preview</ion-title>
+
+
+        <ion-buttons end>
+            <button (click)="emailPdf()"><ion-icon name="share"></ion-icon></button>
+        </ion-buttons>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+        <pdf-viewer src="{{letter.url}}" style="display: block"></pdf-viewer>
+</ion-content>

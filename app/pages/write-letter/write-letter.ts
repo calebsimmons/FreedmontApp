@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ModalController } from 'ionic-angular';
+
+import { LetterModal } from '../letter-modal/letter-modal';
 
 import { LetterService } from '../../providers/letter-service/letter-service';
 
@@ -23,6 +25,7 @@ export class WriteLetter {
 
     constructor(
         public navCtrl: NavController,
+        public modalCtrl: ModalController,
         public letterService: LetterService
     ) {}
 
@@ -99,36 +102,41 @@ export class WriteLetter {
     getLetterBase64() {
         this.letterService.getLetterBase64(this.loan).then( encodedString => {
             this.letterBase64 = encodedString;
-            console.log(this.letterBase64);
         });
     }
 
     getLetterBuffer() {
         this.letterService.getLetterBuffer(this.loan).then( buffer => {
             this.letterBuffer = buffer;
-            console.log(this.letterBuffer);
         });
     }
 
     getLetterBlob() {
         this.letterService.getLetterBuffer(this.loan).then( buffer => {
             this.letterBuffer = buffer;
-            console.log(this.letterBuffer);
             return this.letterService.getLetterBlob(buffer);
         }).then( blob => {
             this.letterBlob = blob;
-            console.log(this.letterBlob);
+        });
+    }
+
+    presentLetterModal() {
+        var loan = this.loan;
+        return this.letterService.getLetterUrl(this.loan).then( url => {
+            var letterModal = this.modalCtrl.create(LetterModal, {
+                'url' : url,
+                'loan' : loan,
+            });
+            letterModal.present();
         });
     }
 
     emailPdf() {
         this.letterService.getLetterBuffer(this.loan).then( buffer => {
             this.letterBuffer = buffer;
-            console.log(this.letterBuffer);
             return this.letterService.getLetterBlob(buffer);
          }).then( blob => {
             this.letterBlob = blob;
-            console.log(this.letterBlob);
             return this.letterService.emailBlobAsFile(blob);
         });
 
