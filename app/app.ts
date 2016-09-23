@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { ionicBootstrap, Platform, Nav } from 'ionic-angular';
 import { StatusBar } from 'ionic-native';
 
+import { Home } from './pages/home/home';
 import { WriteLetter } from './pages/write-letter/write-letter';
 import { LoanOfficer } from './pages/loan-officer/loan-officer';
 
@@ -11,7 +12,7 @@ import { LoanOfficer } from './pages/loan-officer/loan-officer';
 class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = WriteLetter;
+  rootPage: any = Home;
 
   pages: Array<{title: string, component: any}>;
 
@@ -19,8 +20,9 @@ class MyApp {
     this.initializeApp();
 
     this.pages = [
+      { title: 'Home', component: Home },
       { title: 'Write Letter', component: WriteLetter },
-      { title: 'Loan Officer', component: LoanOfficer },
+      { title: 'Edit Profile', component: LoanOfficer },
     ];
 
   }
