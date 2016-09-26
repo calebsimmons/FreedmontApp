@@ -1,19 +1,19 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
-/*
-  Generated class for the HomePage page.
+import { WriteLetter } from '../write-letter/write-letter';
+import { LoanOfficer } from '../loan-officer/loan-officer';
 
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
-  templateUrl: 'build/pages/home/home.html',
+    templateUrl: 'build/pages/home/home.html'
 })
 export class Home {
+    writeLetterPage;
+    editProfilePage;
 
-  constructor(private navCtrl: NavController) {
-
-  }
+    constructor(public navCtrl: NavController) {
+        this.writeLetterPage = WriteLetter;
+        this.editProfilePage = LoanOfficer;
+    }
 
 }

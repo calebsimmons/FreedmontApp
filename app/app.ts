@@ -14,15 +14,15 @@ class MyApp {
 
   rootPage: any = Home;
 
-  pages: Array<{title: string, component: any}>;
+  pages: Array<{title: string, icon: string, component: any}>;
 
   constructor(public platform: Platform) {
     this.initializeApp();
 
     this.pages = [
-      { title: 'Home', component: Home },
-      { title: 'Write Letter', component: WriteLetter },
-      { title: 'Edit Profile', component: LoanOfficer },
+      { title: 'Home', icon: 'home', component: Home },
+      { title: 'Write Letter', icon: 'document', component: WriteLetter },
+      { title: 'Edit Profile', icon: 'person' , component: LoanOfficer },
     ];
 
   }

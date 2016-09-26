@@ -8,6 +8,6 @@
 </ion-header>
 
 <ion-content padding>
-    <button round><ion-icon name="document"></ion-icon> Write Letter</button><br />
-    <button round><ion-icon name="person">  </ion-icon> Edit Profile</button><br />
+    <button round [navPush]="writeLetterPage"><ion-icon name="document"></ion-icon> Write Letter</button><br />
+    <button round [navPush]="editProfilePage"><ion-icon name="person">  </ion-icon> Edit Profile</button><br />
 </ion-content>
